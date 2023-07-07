@@ -11,7 +11,7 @@ import RealityKitContent
 
 struct ContentView: View {
 
-    @State var showImmersiveSpace = false
+    @State var diveIntoVisionPro = false
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
@@ -19,24 +19,29 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             List {
-                Text("Item")
+                Text("Groceries")
+                Text("Reminders")
+                Text("Business")
+                Text("Podcast")
+                Text("Book")
+                Text("Counselling")
             }
-            .navigationTitle("Sidebar")
+            .navigationTitle("To Do Lists")
         } detail: {
             VStack {
                 Model3D(named: "Scene", bundle: realityKitContentBundle)
                     .padding(.bottom, 50)
 
-                Text("Hello, world!")
+                Text("Hello, Raphael!")
 
-                Toggle("Show ImmersiveSpace", isOn: $showImmersiveSpace)
+                Toggle("Dive Into Todays Task", isOn: $diveIntoVisionPro)
                     .toggleStyle(.button)
-                    .padding(.top, 50)
+                    .padding(.top, 10)
             }
             .navigationTitle("Content")
             .padding()
         }
-        .onChange(of: showImmersiveSpace) { _, newValue in
+        .onChange(of: diveIntoVisionPro) { _, newValue in
             Task {
                 if newValue {
                     await openImmersiveSpace(id: "ImmersiveSpace")
@@ -45,6 +50,11 @@ struct ContentView: View {
                 }
             }
         }
+        .shadow(
+            color: .blue,
+            radius: 100
+            
+        )
     }
 }
 
